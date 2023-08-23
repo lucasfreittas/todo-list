@@ -27,7 +27,17 @@ export function List(){
         )
     }
 
-    function handleTaskClick(taskId){
+    function handleTaskClick(e, taskId){
+        console.log(e.target.className)
+        const action = e.target.getAttribute('data-action')
+
+        if(action === 'trash'){
+            e.stopPropagation()
+            setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId))
+            return
+        } else {
+            
+
         setTasks(prevTasks => {
             return prevTasks.map(task => {
                 if(task.id === taskId){
@@ -39,6 +49,7 @@ export function List(){
                 return task
             })
         })
+    }
     }
 
     return(
@@ -63,7 +74,7 @@ export function List(){
                 <Task
                     key={task.id}
                     description={task.description}
-                    onClick={() => handleTaskClick(task.id)}
+                    onClick={(e) => handleTaskClick(e, task.id)}
                     status={task.completed}
                 />
             )): returnEmptyList()
