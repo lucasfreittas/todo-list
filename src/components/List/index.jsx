@@ -1,9 +1,10 @@
 import styles from './List.module.css';
 import ClipboardImg from '../../assets/Clipboard.png'
 import { Task } from '../Task'
+import { useEffect, useState } from 'react'
 
 export function List(){
-    const tasks = [
+    const [tasks, setTasks] = useState([
         {
             id: 1,
             description: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
@@ -15,7 +16,7 @@ export function List(){
             completed: true
         }
     ]
-
+)
     function returnEmptyList(){
         return(
             <div className={styles.emptyList}>
@@ -26,6 +27,19 @@ export function List(){
         )
     }
 
+    function handleTaskClick(taskId){
+        setTasks(prevTasks => {
+            return prevTasks.map(task => {
+                if(task.id === taskId){
+                    return {
+                        ...task,
+                        completed: !task.completed
+                    };
+                }
+                return task
+            })
+        })
+    }
 
     return(
      <>
@@ -49,6 +63,7 @@ export function List(){
                 <Task
                     key={task.id}
                     description={task.description}
+                    onClick={() => handleTaskClick(task.id)}
                     status={task.completed}
                 />
             )): returnEmptyList()
