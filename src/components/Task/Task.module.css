@@ -23,11 +23,6 @@
         fill: var(--purple-500);
     }
 
-    > svg:last-child{
-        color: var(--gray-300);
-        cursor: pointer;
-        font-size: 2rem;
-    }
 }
 
 .uncompleted{
@@ -53,9 +48,20 @@
         font-size: 2.4rem;
     }
 
-    > svg:last-child{
-        color: var(--gray-300);
-        cursor: pointer;
-        font-size: 2rem;
-    }
+}
+
+.trashDiv{
+    color: var(--gray-300);
+    cursor: pointer;
+    font-size: 2rem;
+    background: transparent;
+    width: 3rem;
+    border: none;
+    z-index: 10;
+}
+
+.trashDiv:focus{
+    outline: none;
+    border: none;
+    box-shadow: none;
 }

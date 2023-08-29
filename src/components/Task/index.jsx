@@ -11,11 +11,9 @@ export function Task({ description, status, onClick}){
         <div className={className}>
             {icon}
             <p>{description}</p>
-            <Trash
-                onClick={onClick}
-                className='trash' 
-                data-action='trash'   
-            />
+            <button className={styles.trashDiv} onClick={onClick}>
+                <Trash className='trashDiv'/>
+            </button>
         </div>
     )
 }

@@ -17,6 +17,11 @@ export function List(){
         }
     ]
 )
+
+    function isCompleted(task){
+        return task.completed
+    }
+
     function returnEmptyList(){
         return(
             <div className={styles.emptyList}>
@@ -28,10 +33,9 @@ export function List(){
     }
 
     function handleTaskClick(e, taskId){
-        console.log(e.target.className)
-        const action = e.target.getAttribute('data-action')
-
-        if(action === 'trash'){
+       
+        const action = e.target.getAttribute('class')
+        if(action == 'trashDiv'){
             e.stopPropagation()
             setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId))
             return
@@ -52,18 +56,26 @@ export function List(){
     }
     }
 
+    const completedTasks = tasks.filter(task => task.completed)
+
+    useEffect(() => {
+        const newCompletedTasks = tasks.filter(task => task.completed);
+
+
+    }, [tasks])
+
     return(
      <>
         <section className={styles.listHeader}>
 
             <div className={styles.createdTasks}>
                 <p>Tarefas Criadas</p>
-                <span>0</span>
+                <span>{tasks.length}</span>
             </div>
 
             <div className={styles.totalTasks}>
                 <p>Concluídas</p>
-                <span>0</span>
+                <span>{completedTasks.length}</span>
             </div>
 
         </section>
